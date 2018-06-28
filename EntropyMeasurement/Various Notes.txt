@@ -1,0 +1,20 @@
+Measuring redundancy in a program:
+Shannon entropy:
+	H(A)=-1*Sum(i=1, n, p_i*log_2(p_i))
+	H(A)<=log_2(n)
+		H(A)=log_2(n) iff p(a_i)=1/n for all i
+Absolute redundancy:
+	D=R-r
+	D=Absolute redundancy
+	R=Absolute rate=log|M|, M is cardinality of alphabet
+	r=rate=lim(n->infinity, (1/n)*H(M_1,M_2,...,M_n)
+	joint entropy of first n symbols divided by n
+
+NOTE: create fake variable statistics by using overlapping confidence intervals and weighting connected confidence intervals by corresponding character entropy
+
+NOTE:
+I have the joint entropy for 2 and 3 characters
+
+NOTE:
+Consider including spaces in entropy calculations? should spaces be encrypted? dunno.
+Are these two issues related? Probably.

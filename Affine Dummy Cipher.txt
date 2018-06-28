@@ -1,0 +1,69 @@
+Thoughts on Affine Dummy Cipher (ADC)
+
+Unicity Distance:
+"length of an original ciphertext needed to break the cipher by reducing the number of possible spurious keys to zero in a brute force attack. That is, after trying every possible key, there should be just one decipherment that makes sense, i.e. expected amount of ciphertext needed to determine the key completely, assuming the underlying message has redundancy."
+
+What is the unicity distance of a standard affine cipher?
+12*26 possible keys => probably not much
+
+In a mod29 ADC, we have
+28*28 possible keys, which is slightly better
+
+How do we quantify unicity distance?
+"A tremendous number of possible messages, N, can be generated using even this limited set of characters: N = 26^L, where L is the length of the message. However, only a smaller set of them is readable plaintext due to the rules of the language, perhaps M of them, where M is likely to be very much smaller than N. Moreover, M has a one-to-one relationship with the number of keys that work, so given K possible keys, only K × (M/N) of them will "work". One of these is the correct key, the rest are spurious.
+
+Since M/N gets arbitrarily small as the length L of the message increases, there is eventually some L that is large enough to make the number of spurious keys equal to zero. Roughly speaking, this is the L that makes KM/N=1. This L is the unicity distance."
+
+More Detail:
+U=H(k)/D
+where U is the unicity distance, H(k) is the entropy of the key space (e.g. 128 for 2^128 equiprobable keys, rather less if the key is a memorized pass-phrase). D is defined as the plaintext redundancy in bits per character.
+
+Now an alphabet of 32 characters can carry 5 bits of information per character (as 32 = 25). In general the number of bits of information per character is log2(N), where N is the number of characters in the alphabet and log2 is the binary logarithm. So for English each character can convey log2(26) = 4.7 bits of information.
+
+However the average amount of actual information carried per character in meaningful English text is only about 1.5 bits per character. So the plain text redundancy is D = 4.7 − 3.5 = 1.2
+
+Basically the bigger the unicity distance the better. For a one time pad of unlimited size, given the unbounded entropy of the key space, we have U = ∞, which is consistent with the one-time pad being unbreakable.
+
+
+
+EXAMPLES:
+Substitution cipher
+26! keys= 2^88.4
+Assuming all keys are equally likely,
+H(k)=log2(26!)=88.4 bits
+Since, for English, D=1.2,
+U=88.4/1.2=73
+So one can crack a substitution cipher in ~73 characters
+
+Let's try a standard Affine Cipher:
+12*26 keys = 2^8.285
+H(K)=log2(12*26)=8.285
+Then, since D=3.2,
+U=8.285/1.2=6.68
+So one can crack an affine cipher in 6.68 characters??
+
+Affine Dummy Cipher: What Changes?
+Right off the bat, key space increases
+For mod29, 28*28k keys = 2^9.6
+Log2(28*28) = 9.6
+So on first glance, U=9.6/1.2=8
+That blows
+BUT
+U=H(k)/D
+D is our redundancy in bits per character
+The introduction of dummy characters CHANGES THIS
+
+NOTE:
+Redundancy:
+r=rate
+entropy per symbol in raw data
+in memoryless sources, entropy of each symbol
+See: rate in stochastic processes
+
+R=absolute rate
+R=log|M|
+where M is the cardinality of the alphabet or message space
+
+Absolute redundancy:
+D=R-r
+Absolute rate-rate
