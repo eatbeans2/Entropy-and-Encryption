@@ -3,4 +3,6 @@ Final project attempting to affect (and measure) the unicity distance of ciphers
 
 affineCipher.py uses a simple cipher to encrypt or decrypt text via a key.
 
-The asciiEntropy files seem to calculate the entropy of a language sample given the size of the alphabet. NewAsciiEntropy seems to do this with a larger alphabet, probably used in junction with the xorcipher, while the original asciiEntropy is probably used with affineCipher.
+The asciiEntropy files seem to calculate the entropy of a language sample given the size of the alphabet. NewAsciiEntropy seems to do this with a larger alphabet, probably used in junction with the xorEncryptor, while the original asciiEntropy is probably used with affineCipher.
+
+xorEncryptory.py is a more practical cipher which uses bit xor to encode data
